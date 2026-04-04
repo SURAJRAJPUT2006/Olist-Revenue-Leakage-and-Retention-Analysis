@@ -25,11 +25,10 @@ Date: April 2025
 -- ------------------------------------------------------------------
 -- STEP 1: Assign each customer to their signup cohort (month)
 -- ------------------------------------------------------------------
-
 WITH customer_cohorts AS (
     SELECT 
         customer_unique_id,
-        DATE_TRUNC('month', MIN(order_purchase_timestamp))::DATE AS cohort_month
+        DATE_FORMAT(MIN(order_purchase_timestamp), '%Y-%m-01') AS cohort_month
     FROM order_level
     WHERE order_status = 'delivered'
     GROUP BY customer_unique_id
@@ -38,58 +37,54 @@ WITH customer_cohorts AS (
 -- ------------------------------------------------------------------
 -- STEP 2: Track customer activity by month
 -- ------------------------------------------------------------------
-
-monthly_customer_activity AS (
+ monthly_customer_activity AS (
     SELECT 
         c.cohort_month,
-        DATE_TRUNC('month', o.order_purchase_timestamp)::DATE AS activity_month,
+        DATE_FORMAT(o.order_purchase_timestamp, '%Y-%m-01') AS activity_month,
         COUNT(DISTINCT o.customer_unique_id) AS active_customers,
         SUM(o.total_payment_value) AS cohort_revenue
     FROM order_level o
     INNER JOIN customer_cohorts c 
         ON o.customer_unique_id = c.customer_unique_id
     WHERE o.order_status = 'delivered'
-    GROUP BY 
-        c.cohort_month, 
-        DATE_TRUNC('month', o.order_purchase_timestamp)
+    GROUP BY c.cohort_month, DATE_FORMAT(o.order_purchase_timestamp, '%Y-%m-01')
 ),
-
 -- ------------------------------------------------------------------
 -- STEP 3: Calculated retention metrics using window functions
 -- ------------------------------------------------------------------
-
 cohort_metrics AS (
     SELECT 
         cohort_month,
         activity_month,
         active_customers,
         cohort_revenue,
-        -- Get cohort size (customers in first month)
+        -- Get cohort size 
         FIRST_VALUE(active_customers) OVER (
-            PARTITION BY cohort_month 
+            PARTITION BY cohort_month
             ORDER BY activity_month
         ) AS cohort_size,
-        -- Calculate months since cohort start
-        EXTRACT(YEAR FROM AGE(activity_month, cohort_month)) * 12 + 
-        EXTRACT(MONTH FROM AGE(activity_month, cohort_month)) AS months_since_signup
+        TIMESTAMPDIFF(MONTH, cohort_month, activity_month) AS months_since_signup
     FROM monthly_customer_activity
 )
-
 -- ------------------------------------------------------------------
 -- FINAL: Cohort retention table
 -- ------------------------------------------------------------------
-
 SELECT 
     cohort_month,
-    cohort_size,
-    months_since_signup,
+    activity_month,
     active_customers,
-    ROUND(100.0 * active_customers / cohort_size, 2) AS retention_pct,
     cohort_revenue,
-    ROUND(cohort_revenue / active_customers, 2) AS revenue_per_active_customer
-FROM cohort_metrics
-WHERE months_since_signup <= 6  -- First 6 months of cohort life
-ORDER BY cohort_month, months_since_signup;
+    ROUND(100.0 * active_customers / 
+        FIRST_VALUE(active_customers) OVER (
+            PARTITION BY cohort_month 
+            ORDER BY activity_month
+        ), 2) AS retention_pct,
+    TIMESTAMPDIFF(MONTH, 
+        STR_TO_DATE(cohort_month, '%Y-%m-%d'), 
+        STR_TO_DATE(activity_month, '%Y-%m-%d')
+    ) AS months_since_signup
+FROM monthly_customer_activity
+ORDER BY cohort_month, activity_month;
 -- ------------------------------------------------------------------
 -- KEY INSIGHTS:
 -- ------------------------------------------------------------------
