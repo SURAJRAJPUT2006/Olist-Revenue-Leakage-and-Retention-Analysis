@@ -37,7 +37,7 @@ WITH monthly_metrics AS (
     FROM order_level
     WHERE order_status = 'delivered'
         AND order_purchase_timestamp IS NOT NULL
-    GROUP BY 1
+    GROUP BY 1   
 ),
 
 -- --------------------------------------------------------------------
