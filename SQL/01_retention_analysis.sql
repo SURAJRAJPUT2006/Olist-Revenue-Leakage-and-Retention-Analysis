@@ -9,7 +9,7 @@ How does first-order delivery experience impact customer retention?
 Key Findings:
 - Only 3.1% of customers make repeat purchases
 - First-order delays reduce repeat rate from 3.44% to 2.79%
-- Revenue opportunity: $3.17M if retention matched industry benchmarks
+- Revenue opportunity: $3.17M if retention matched industry benchmarks 
 
 Author: Suraj Rajput
 Date: April 2025
