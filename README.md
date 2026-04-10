@@ -41,7 +41,7 @@ Olist connects small/medium Brazilian sellers to customers via major e-commerce 
 olist-revenue-analysis/
 │
 ├── data/
-│   ├── raw/                          # Original Kaggle dataset (8 CSV files)
+│   ├── raw/                          # Original Kaggle dataset (9 CSV files)
 │   └── cleaned/                    # Cleaned analytical tables
 │
 ├── notebooks/
