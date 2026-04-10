@@ -42,7 +42,7 @@ olist-revenue-analysis/
 │
 ├── data/
 │   ├── raw/                          # Original Kaggle dataset (8 CSV files)
-│   └── processed/                    # Cleaned analytical tables
+│   └── cleaned/                    # Cleaned analytical tables
 │
 ├── notebooks/
 │   ├── 01_data_cleaning.ipynb        # Data preparation & quality checks
@@ -378,7 +378,7 @@ This is what data analysts do — **find the truth hiding in the numbers.**
 
 - **Interactive Dashboard:** [Power BI Service Link] *(link expired)*
 - **Dataset Source:** [Kaggle - Olist E-Commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-- 
+
 ---
 
 ## 📄 License
