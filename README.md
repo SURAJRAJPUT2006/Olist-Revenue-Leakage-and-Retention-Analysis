@@ -15,7 +15,7 @@ Comprehensive analysis of 99,441 e-commerce orders from Brazilian marketplace Ol
 **Key Results:**
 - **$7.2M total addressable opportunity** identified across 4 strategic areas
 - **Customer retention crisis:** 3.1% vs 15-20% industry benchmark = $3.17M opportunity
-- **Seller quality paradox:** 57% revenue from poor performers = $3.19M lost LTV
+- **Seller quality paradox:** 57% revenue from poor performers = $3.19M lost LTV 
 - **Geographic/seasonal insights:** $797K in preventable operational losses
 
 **Analysis Period:** September 2016 - October 2018  
