@@ -55,7 +55,7 @@ olist-revenue-analysis/
 │
 ├── dashboards/
 │   ├── olist_dashboard.png    #  dashboard
-│   └── screenshots/                       # Dashboard images
+│   
 │
 ├── results/
 │   ├── executive_summary.pdf         # 1-page business summary
