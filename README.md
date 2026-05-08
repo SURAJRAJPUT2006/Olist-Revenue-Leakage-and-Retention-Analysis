@@ -54,7 +54,7 @@ olist-revenue-analysis/
 │   └── 03_seasonal_delay_patterns.sql    # Seasonal trend analysis
 │
 ├── dashboards/
-│   ├── olist_executive_dashboard.pbix    # Power BI dashboard
+│   ├── olist_dashboard.png    #  dashboard
 │   └── screenshots/                       # Dashboard images
 │
 ├── results/
