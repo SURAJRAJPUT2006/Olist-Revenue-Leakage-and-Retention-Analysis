@@ -314,31 +314,18 @@ mysql -u username -p database_name < sql/01_retention_analysis.sql
 
 ---
 
-## 📊 Dashboard Preview
+## 📊 Executive Dashboard
 
-**4-Page Executive Dashboard:**
+I developed an interactive executive dashboard in Looker Studio to visualize the $7.2M revenue recovery roadmap.
 
-### Page 1: Business Health Overview
-- KPI Cards: Total Orders, Revenue, Delay %, Avg Review Score
-- Monthly order trends
-- Top categories and states
+### [👉 View Live Interactive Dashboard](https://datastudio.google.com/reporting/d6d5c64d-1808-401b-8561-ea61c0f5d666)
 
-### Page 2: Retention Deep-Dive
-- Repeat rate by first-order experience
-- Customer distribution (1-time, 2-3 orders, 4+ orders)
-- Cohort retention analysis
+![Olist Executive Dashboard](dashboards/olist_dashboard.png)
 
-### Page 3: Seller Performance Matrix
-- Segmentation scatter plot (Revenue vs Performance)
-- Performance metrics by segment
-- High-risk seller identification
-
-### Page 4: Geographic & Seasonal Insights
-- State-level delay rate heatmap
-- Monthly delay trends with spike identification
-- Seasonal pattern analysis
-
-![Dashboard Preview](dashboards/screenshots/dashboard_overview.png)
+**Key Features of the Dashboard:**
+- **Revenue Impact Modeling:** Filter by leakage area to see specific opportunity sizes.
+- **Seller Quality Matrix:** Identifies "Risky Cash Cows" destroying customer LTV.
+- **Strategic Prioritization:** Visualizes ROI across different business interventions.
 
 ---
 
